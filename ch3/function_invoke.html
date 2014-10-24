@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+    //    function creep() {
+    //        return this;
+    //    }
+    //    assert(creep() === window, 'Creep in the window');
+    //
+    //    var sneak = creep;
+    //    assert(sneak() === window, 'Sneaking in the window');
+    //
+    //    var ninja1 = {
+    //        skulk: creep
+    //    };
+    //    assert(ninja1.skulk() === ninja1, 'The 1st ninja is skulking');
+    //
+    //    var ninja2 = {
+    //        skulk: creep
+    //    };
+    //    assert(ninja2.skulk() === ninja2, 'The 2nd ninja is skulking');
+
+    // Listing 3.5
+    //    function juggle() {
+    //        var result = 0;
+    //        for (var n = 0; n < arguments.length; n++) {
+    //            result += arguments[n];
+    //        }
+    //        this.result = result;
+    //    }
+    //
+    //    var ninja1 = {};
+    //    var ninja2 = {};
+    //
+    //    juggle.apply(ninja1, [1, 2, 3, 4]);
+    //
+    //    juggle.call(ninja2, 5, 6, 7, 8);
+    //    assert(ninja1.result === 10, 'juggled by apply');
+    //    assert(ninja2.result === 26, 'juggled by call');
+
+    // Listing 3.6
+    var weapons = ['gun', 'fire bot', 'lightening'];
+    function forEach(list, callback) {
+        for (var i = 0; i < list.length; i++) {
+            callback.call(list[i], i);
+        }
+    }
+
+    // Such an iteration function could simply pass the “current” element to the
+    // callback as a parameter, but most make the current element the function context of
+    // the callback.
+    forEach(weapons, function (index) {
+        console.log(this + ', ' + index);
+        assert(this == weapons[index], 'Got the expected value of ' + weapons[index])
+    });
+
+
+</script>
+</body>
+</html>
