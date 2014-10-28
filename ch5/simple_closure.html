@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+
+    var outerValue = 'ninja';
+    var later;
+
+    //simple
+    //
+    //    function outerFunction() {
+    //        assert(outerValue == 'ninja', 'I can see the ninja');
+    //    }
+    //
+    //    outerFunction();
+
+    //not so simple
+    //
+    //    function outerFunction() {
+    //        var innerValue = 'samurai';
+    //
+    //        function innerFunction() {
+    //            assert(outerValue, 'I can see the ninja');
+    //            assert(innerValue, 'I can see the samurai')
+    //        }
+    //
+    //        later = innerFunction;
+    //    }
+    //
+    //    outerFunction();
+    //
+    //    later();
+
+    function outerFunction() {
+        var innerValue = 'samurai';
+
+        function innerFunction(paramValue) {
+            assert(outerValue, 'Inner can see the ninja');
+            assert(innerValue, 'Inner can see the samurai');
+            assert(paramValue, 'Inner can see the wakizashi');
+            assert(tooLate, 'Inner can see the ronin');
+        }
+
+        later = innerFunction;
+    }
+
+    assert(!tooLate, 'Outer cant see the ronin');
+
+    var tooLate = 'ronin';
+    outerFunction();
+    later('wazikashi');
+
+
+</script>
+</body>
+</html>

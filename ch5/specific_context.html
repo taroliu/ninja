@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<button id="test">Click Me!</button>
+<script>
+    //  This method is
+    //  designed to create and return a new anonymous function that calls the original
+    //  function, using apply(), so that we can force the context to be whatever object we
+    //  want.
+    function bind(context, name) {
+        return function () {
+            return context[name].apply(context, arguments);
+        }
+    }
+    var button = {
+        clicked: false,
+        click: function () {
+            this.clicked = true;
+            assert(button.clicked, 'The button has been clicked');
+            console.log(this);
+        }
+    };
+
+    var elem = document.getElementById('test');
+    //    elem.addEventListener('click', button.click, false);
+    elem.addEventListener('click', bind(button, 'click'), false);
+</script>
+
+</body>
+</html>
