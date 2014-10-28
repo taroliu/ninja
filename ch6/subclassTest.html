@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <script src="../js/subclass.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+    var Person = Object.subClass({
+        init: function (isDancing) {
+            this.dancing = isDancing;
+        },
+        dance: function () {
+            return this.dancing;
+        }
+    });
+
+    var Ninja = Person.subClass({
+        init: function () {
+            this._super(false);
+        },
+
+        dance: function () {
+            return this._super();
+        },
+
+        swingSword: function () {
+            return true;
+        }
+    });
+
+    var person = new Person(true);
+    assert(person.dance(), 'The person is dancing.');
+
+    var ninja = new Ninja();
+    assert(ninja.swingSword(), 'The sword is swinging.');
+    assert(!ninja.dance(), 'The ninja is not dancing.');
+    assert(person instanceof Person, 'Person is a Person.');
+    assert(ninja instanceof Person && ninja instanceof Ninja, 'Ninja is a Ninja and a Person')
+</script>
+</body>
+</html>
