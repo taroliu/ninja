@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<div class="samurai ninja"></div>
+<div class="ninja samurai"></div>
+<div></div>
+<span class="samurai ninja ronin"></span>
+<ul id="results"></ul>
+<script>
+    function fincClassInElements(className, type) {
+        var elems = document.getElementsByTagName(type||'*');
+        console.log(type);
+        console.log(elems);
+        // \s: Any whitespace character (space, tab, form feed, and so on)
+        // the dollar sign ($) signifies that the pattern must appear at the end of the
+        // output: /(^|\s)ninja(\s|$)/
+        var regex = new RegExp('(^|\\s)'+className+'(\\s|$)');
+        console.log(regex.toString());
+
+        var results = [];
+
+        for (var i = 0, length=elems.length;i<length; i++) {
+            console.log(elems[i].className);
+            if(regex.test(elems[i].className)){
+                results.push(elems[i]);
+            }
+        }
+
+        return results;
+    }
+
+    assert(fincClassInElements('ninja','div').length==2, 'The right amount of div ninjas was found.');
+    assert(fincClassInElements('ninja','span').length==1, 'The right amount of span ninjas was found.');
+    assert(fincClassInElements('ninja').length==3, 'The right amount of ninjas was found.');
+</script>
+</body>
+</html>

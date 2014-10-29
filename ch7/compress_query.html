@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+    function compress(source) {
+        var keys = {};
+        // If we want a character to appear one or many times, we use +
+        // If we want the character to appear zero or many times, * is used,
+        var pattern = /([^=&]+)=([^&]*)/g;
+        console.log(source);
+        console.log(pattern);
+        source.replace(pattern,
+                function (full, key, value) {
+                    console.log(key+'='+value);
+                    keys[key] = (keys[key] ? keys[key] + ',' : '') + value;
+                    return '';
+                }
+        );
+
+        var result = [];
+        for (var key in keys) {
+            result.push(key + '=' + keys[key]);
+        }
+
+        return result.join('&');
+    }
+
+    assert(compress('foo=1&foo=2&blah=a&blah=b&foo=3') == "foo=1,2,3&blah=a,b", 'Compression is OK!')
+
+
+</script>
+
+</body>
+</html>
