@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<table>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    var rowCount = 20000;
+    var divideInto = 400;
+    var chunkSize = rowCount / divideInto;
+    var iteration = 0;
+    var table = document.getElementsByTagName("tbody")[0];
+    setTimeout(function generateRows() {
+        var base = (chunkSize) * iteration;
+        for (var i = 0; i < chunkSize; i++) {
+            var tr = document.createElement("tr");
+            for (var t = 0; t < 6; t++) {
+                var td = document.createElement("td");
+                td.appendChild(
+                        document.createTextNode((i + base) + "," + t +
+                                "," + iteration));
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+        iteration++;
+        if (iteration < divideInto)
+            setTimeout(generateRows, 0);
+    }, 0);
+</script>
+</body>
+</html>
