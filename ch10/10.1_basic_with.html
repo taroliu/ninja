@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+    var use = 'other';
+    var katana = {
+        isSharp: true,
+        use: function () {
+            this.isSharp = !this.isSharp;
+        }
+    };
+
+    with (katana) {
+        assert(use !== 'other', 'use is a function from the katana object.');
+        assert(this != katana, 'context isn\'t changed; keeps its original value');
+
+        // 10.2
+        isSharp = false;
+        assert(katana.isSharp === false, 'properties can be assigned');
+
+//        cut = function () {
+//            isSharp = false;
+//        };
+        katana.cut = function () {
+            isSharp = false;
+        };
+
+        assert(typeof katana.cut == 'function', 'new properties can be created on the scoped object');
+        assert(typeof window.cut == 'function', 'new properties are created in the global scope');
+
+    }
+    assert(use === "other",
+            "outside the with use is unaffected.");
+    assert(typeof isSharp === "undefined",
+            "outside the with the properties don't exist.");
+</script>
+</body>
+</html>
