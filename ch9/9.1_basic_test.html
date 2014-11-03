@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</head>
+<body>
+<ul id="results"></ul>
+<script>
+    assert(eval('5+5') === 10, '5 and 5 is 10');
+    assert(eval('var ninja=5') === undefined, 'no value was returned.')
+    assert(ninja == 5, 'The var ninja was created');
+    (function () {
+        eval('var ninja = 6;');
+        assert(ninja === 6, 'evaluated within the current scope/')
+    })();
+
+    assert(window.ninja === 5, 'the global scope was unaffected.');
+    assert(ninja === 5, 'the global scope was unaffected.');
+
+    // 9.2
+    var ninja = eval("({name:'Ninja'})");
+    assert(ninja != undefined, ' the ninja was created');
+    assert(ninja.name === 'Ninja', 'and with the expected property');
+    console.log(ninja);
+</script>
+
+</body>
+</html>
